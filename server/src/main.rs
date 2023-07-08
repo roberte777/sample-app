@@ -6,7 +6,7 @@ use axum::{
     headers,
     response::IntoResponse,
     routing::get,
-    Router,
+    Json, Router,
 };
 
 use std::borrow::Cow;
@@ -20,14 +20,21 @@ use axum::extract::ws::CloseFrame;
 //allows to split the websocket stream into separate TX and RX branches
 use futures::{sink::SinkExt, stream::StreamExt};
 
+async fn hello_world() -> Json<String> {
+    Json("Hello World".to_string())
+}
+
 #[tokio::main]
 async fn main() {
     // build our application with some routes
-    let app = Router::new().route("/ws", get(ws_handler));
+    let app = Router::new()
+        .route("/ws", get(ws_handler))
+        .route("/", get(hello_world));
     // logging so we can see whats going on
 
     // run it with hyper
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3001));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3001));
+    println!("Listening on http://{}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service_with_connect_info::<SocketAddr>())
         .await
