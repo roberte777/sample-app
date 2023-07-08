@@ -10,6 +10,9 @@ services:
   react_frontend:
     build:
       context: ./react_frontend
+      args:
+        - NEXT_PUBLIC_RUST_URL=http://localhost:3001
+        - NEXT_PUBLIC_WEBSOCKET_URL=ws://localhost:3001/ws
     container_name: react_frontend
     ports:
       - "3000:3000"
