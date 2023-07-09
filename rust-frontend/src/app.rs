@@ -40,14 +40,27 @@ pub fn App(cx: Scope) -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn HomePage(cx: Scope) -> impl IntoView {
-    // Creates a reactive value to update the button
-    let (count, set_count) = create_signal(cx, 0);
-    let on_click = move |_| set_count.update(|count| *count += 1);
 
     view! { cx,
-        <main class="my-0 mx-auto max-w-3xl text-center">
-            <h1 class="p-6 text-4xl">"Welcome to Leptos!"</h1>
-            <button on:click=on_click class="bg-amber-600 hover:bg-sky-700 px-5 py-3 text-white rounded-lg">"Click Me: " {count}</button>
+        <main class="my-0 ">
+            <div class="flex">
+                <div class="basis-1/2">
+                    <h2 class="text-2xl font-bold"> "Websocket Messages"</h2>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        "Sample Buttons"
+                    </h2>
+                    <div class="flex space-x-4 p-2">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            "Start"
+                        </button>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            "Stop"
+                        </button>
+                    </div>
+                </div>
+            </div>
         </main>
     }
 }
