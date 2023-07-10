@@ -26,7 +26,7 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
-RUN echo $NEXT_PUBLIC_WEBSOCKET_URL
+
 ARG NEXT_PUBLIC_WEBSOCKET_URL
 ARG NEXT_PUBLIC_RUST_URL
 ENV NEXT_PUBLIC_WEBSOCKET_URL=${NEXT_PUBLIC_WEBSOCKET_URL}
